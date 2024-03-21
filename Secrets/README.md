@@ -16,12 +16,13 @@ Absolutely, positively never-ever store secrets hard-coded in your source. And d
 
 If you are using the macOS default install of Ruby, things may not work early on. Go ahead and install the Homebrew version of Ruby instead.
 
-- [Install Homebrew](https://brew.sh/) (You should have this in general)
-- `brew install ruby`
+```sh
+brew install ruby
+```
 
 Cocoapods blithely suggests that you install it using `sudo`. This is a terrible suggestion -- you don't want to install software as root! Instead, fix the permissions that are blocking it.
 
-``` bash
+``` sh
 ls -hal /opt/homebrew/lib/ruby
 ```
 

@@ -36,7 +36,7 @@ drwxr-xr-x@   3 sbattis  admin    96B Mar 19 14:23 site_ruby
 drwxr-xr-x    3 sbattis  admin    96B Mar 20 15:27 vendor_ruby
 ```
 
-The user (`sbattis`) and group (`admin`) are listed net to each subdirectory. The core problem is that somewhere in `gems`, a directory is owned by `root`, when it should be owned by _you_. Fix it (user your username in place of mine)!
+The user (`sbattis`) and group (`admin`) are listed next to each subdirectory. The core problem is that somewhere in `gems`, a directory is owned by `root`, when it should be owned by _you_. Fix it (user your username in place of mine)!
 
 ```bash
 sudo chown -R sbattis /opt/homebrew/lib/ruby/gems

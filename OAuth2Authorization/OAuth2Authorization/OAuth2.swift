@@ -9,12 +9,12 @@ import Foundation
 import CommonCrypto
 
 struct OAuth2 {
-    let authURL: String
-    let tokenURL: String
+    let authURL: URL
+    let tokenURL: URL
     let clientID: String
     let clientSecret: String?
     let scope: String?
-    let redirectURI: String
+    let redirectURI: URL
     var state: String?
     var verifier: String?
     
@@ -25,7 +25,7 @@ struct OAuth2 {
     ///   - clientSecret: (Optional) Client secret value registered with the API (not needed for recommended iOS PKCE authorization flow)
     ///   - scope: (Optional) Space-separated list of scopes to be requested with any token
     ///   - redirectURI: Redirect URI registered with the API
-    init(authURL: String, tokenURL: String, clientID: String, clientSecret: String? = nil, scope: String? = nil, redirectURI: String) {
+    init(authURL: URL, tokenURL: URL, clientID: String, clientSecret: String? = nil, scope: String? = nil, redirectURI: URL) {
         self.authURL = authURL
         self.tokenURL = tokenURL
         self.clientID = clientID
@@ -37,16 +37,16 @@ struct OAuth2 {
     /// - parameters
     ///   - flow: (Optional) The authorization flow being attempted (defaults to `.PKCE`
     mutating func getAuthorizationURL(flow: AuthorizationFlow = .PKCE) -> URL {
-        var url = URL(string: authURL)!.appending(queryItems: [
+        var queryItems = [
             URLQueryItem(name: "response_type", value: "code"),
             URLQueryItem(name: "client_id", value: clientID),
-            URLQueryItem(name: "redirect_uri", value: redirectURI),
+            URLQueryItem(name: "redirect_uri", value: redirectURI.absoluteString),
             URLQueryItem(name: "state", value: createState())
-        ])
+        ]
 
         switch flow {
         case .PKCE:
-            url = URL(string: authURL)!.appending(queryItems: [
+            queryItems.append(contentsOf: [
                 URLQueryItem(name: "code_challenge", value: createCodeChallenge()),
                 URLQueryItem(name: "code_challenge_method", value: "S256"),
             ])
@@ -56,18 +56,18 @@ struct OAuth2 {
         }
         
         if (scope != nil) {
-            url = url.appending(queryItems: [URLQueryItem(name: "scope", value: scope)])
+            queryItems.append(URLQueryItem(name: "scope", value: scope))
         }
-        return url;
+        return authURL.appending(queryItems: queryItems)
     }
     
     /// - parameters
     ///   - redirectedURL: The URL passed intp the app via URL scheme
     ///   - flow: (Optional) The authorization flow being attempted (defaults to `.PKCE`
     ///   - completionHandler: Closure that will receive the resulting `TokenResponse` (or error)
-    mutating func handleRedirect(_ redirectedURL: URL, flow: AuthorizationFlow = .PKCE, completionHandler: @escaping (TokenResponse?, (any Error)?) -> Void) {
+    mutating func handleRedirect(_ redirectedURL: URL, flow: AuthorizationFlow = .PKCE, completionHandler: @escaping (TokenResponse?, Error?) -> Void) -> Void {
         // not just any URL matching our app URL scheme should be processed!
-        guard matchRedirectURI(proposed: redirectedURL.absoluteString) else {
+        guard matchRedirectURI(proposed: redirectedURL) else {
             completionHandler(nil, OAuth2Error.RedirectedURIMismatch)
             return
         }
@@ -80,51 +80,48 @@ struct OAuth2 {
         }
         state = nil
 
-        var url = URL(string: tokenURL)!
-            .appending(queryItems: [
+        var body = [
                 URLQueryItem(name: "grant_type", value: "authorization_code"),
-                URLQueryItem(name: "code", value: components!.queryItems!.first(where: {$0.name == "code"})!.value),
-                URLQueryItem(name: "redirect_uri", value: redirectURI),
+                URLQueryItem(name: "code", value: components!.queryItems!.first(where: {$0.name == "code"})!.value!),
+                URLQueryItem(name: "redirect_uri", value: redirectURI.absoluteString),
                 URLQueryItem(name: "client_id", value: clientID),
-            ])
+            ]
         switch flow {
         case .PKCE:
-            url = url.appending(queryItems: [
-                URLQueryItem(name: "code_verifier", value: verifier),
-            ])
+            body.append(
+                URLQueryItem(name: "code_verifier", value: verifier)
+            )
             verifier = nil
             break;
         case .ClientSecret:
-            url = url.appending(queryItems: [
+            
+            body.append(
                 URLQueryItem(name: "client_secret", value: clientSecret)
-            ])
+            )
             break;
         }
-        var tokenRequest = URLRequest(url: url)
+        var httpBody = URLComponents();
+        httpBody.queryItems = body;
+        
+        var tokenRequest = URLRequest(url: tokenURL)
         tokenRequest.setValue("application/json", forHTTPHeaderField: "Accept")
+        tokenRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         tokenRequest.httpMethod = "POST"
+        tokenRequest.httpBody = httpBody.query?.data(using: .utf8)
 
-        let asyncRequest = tokenRequest
-        Task.detached(operation: {
+        URLSession.shared.dataTask(with: tokenRequest) {data, response, error in
             do {
-                let (data, _) = try await URLSession.shared.data(for: asyncRequest)
-                var tokenResponse: TokenResponse?
-                var decodingError: Error?
-                do {
-                    tokenResponse = try JSONDecoder().decode(TokenResponse.self, from: data)
-                } catch {
-                    decodingError = error
-                }
-                completionHandler(tokenResponse, decodingError)
+                let tokenResponse = try JSONDecoder().decode(TokenResponse.self, from: data!)
+                completionHandler(tokenResponse, nil)
             } catch {
-                completionHandler(nil, error)
+                completionHandler(nil, OAuth2Error.APIResponse(error: String(data: Data(base64Encoded: data!.base64EncodedString())!, encoding: .utf8)!))
             }
-        })
+        }.resume()
     }
     
-    private func matchRedirectURI(proposed: String) -> Bool {
-        let proposedComponents = URLComponents(string: proposed)
-        let expectedComponents = URLComponents(string: redirectURI)
+    private func matchRedirectURI(proposed: URL) -> Bool {
+        let proposedComponents = URLComponents(url: proposed, resolvingAgainstBaseURL: true)
+        let expectedComponents = URLComponents(url: redirectURI, resolvingAgainstBaseURL: true)
         
         return proposedComponents?.scheme?.lowercased() == expectedComponents?.scheme?.lowercased() &&
         proposedComponents?.host?.lowercased() == expectedComponents?.host?.lowercased() &&
@@ -172,13 +169,14 @@ struct OAuth2 {
     enum OAuth2Error: Error {
         case RedirectedURIMismatch
         case StateMismatch
+        case APIResponse(error: String)
     }
     
     enum AuthorizationFlow {
         case ClientSecret
         case PKCE
     }
-    
+        
     struct TokenResponse: Codable, Hashable  {
         let access_token: String
         let token_type: String

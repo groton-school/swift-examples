@@ -14,6 +14,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
+            Text("\(Bundle.main.bundleIdentifier!)://…")
             Form{
                 LabeledContent {
                     Text(urlLabel)

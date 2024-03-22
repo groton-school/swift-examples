@@ -12,12 +12,16 @@ struct WebView: UIViewRepresentable {
 
     let webView = WKWebView()
     let url: URL
+    
+    init(url: URL, clearData: Bool = false) {
+        self.url = url
+        if clearData {
+            WKWebsiteDataStore.default().removeData(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(), modifiedSince: Date(timeIntervalSince1970: 0), completionHandler: {})
+        }
+    }
             
     func makeUIView(context: Context) -> some WKWebView {
-        // for testing
-        WKWebsiteDataStore.default().removeData(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(), modifiedSince: Date(timeIntervalSince1970: 0), completionHandler: {})
-        
-        var request = URLRequest(url: url)
+        let request = URLRequest(url: url)
         webView.uiDelegate = context.coordinator
         webView.navigationDelegate = context.coordinator
         webView.load(request)

@@ -13,7 +13,7 @@ struct ContentView: View {
         let keys = Keys.OrgGrotonSwiftExamplesSecretsKeys()
         
         VStack {
-            Form {
+            List {
                 LabeledContent {
                     Text(keys.secretOne)
                 } label: {

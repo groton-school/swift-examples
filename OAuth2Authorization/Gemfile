@@ -1,3 +1,4 @@
 source 'https://rubygems.org'
 
+gem 'cococapods'
 gem 'cocoapods-keys'

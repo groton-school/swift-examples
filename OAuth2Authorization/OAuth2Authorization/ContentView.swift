@@ -36,18 +36,30 @@ struct ContentView: View {
                         }
                     )
                 }.onOpenURL(perform: {url in
-                    oauth2.handleRedirect(url, flow: .ClientSecret) {token, error in
-                        guard error == nil else {
-                            print(error!.localizedDescription)
-                            return
-                        }
-                        self.token = token
-                    }
+                    oauth2.handleRedirect(url, flow: .ClientSecret, completionHandler: storeToken)
                 })
             }
         } else {
-            TokenView(token: token!)
+            VStack {
+                TokenView(token: token!)
+                Button("Refresh Token", action: {
+                    oauth2.requestToken(grantType: .RefreshToken, refreshToken: token?.refresh_token, completionHandler: storeToken)
+                })
+            }
         }
+    }
+    
+    private func storeToken(_ token: OAuth2.TokenResponse?, _ error: Error?) {
+        guard error == nil else {
+            print(error!.localizedDescription)
+            return
+        }
+        guard token != nil else {
+            print("nil token")
+            return;
+        }
+        self.token = token
+
     }
 }
 

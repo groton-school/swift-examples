@@ -17,7 +17,7 @@ struct OAuth2 {
     let redirectURI: URL
     var state: String?
     var verifier: String?
-    
+
     /// - parameters
     ///   - authUrl: URL for interactive authorization requests
     ///   - tokenURL: URL for requesting tokens (and refresh tokens)
@@ -79,27 +79,56 @@ struct OAuth2 {
             return
         }
         state = nil
-
+        
+        requestToken(
+            grantType: .AuthorizationCode,
+            code: components!.queryItems!.first(where: {$0.name == "code"})!.value!,
+            flow: flow,
+            completionHandler: completionHandler
+        )
+    }
+    
+    mutating public func requestToken(grantType: GrantType, code: String? = nil, refreshToken: String? = nil, flow: AuthorizationFlow = .PKCE, completionHandler: @escaping (TokenResponse?, Error?) -> Void) {
         var body = [
-                URLQueryItem(name: "grant_type", value: "authorization_code"),
-                URLQueryItem(name: "code", value: components!.queryItems!.first(where: {$0.name == "code"})!.value!),
-                URLQueryItem(name: "redirect_uri", value: redirectURI.absoluteString),
-                URLQueryItem(name: "client_id", value: clientID),
-            ]
-        switch flow {
-        case .PKCE:
-            body.append(
-                URLQueryItem(name: "code_verifier", value: verifier)
-            )
-            verifier = nil
-            break;
-        case .ClientSecret:
-            
+            URLQueryItem(name: "client_id", value: clientID)
+        ]
+        
+        switch grantType {
+        case .AuthorizationCode:
+            guard code != nil else {
+                completionHandler(nil, OAuth2Error.InvalidAuthorizationCode)
+                return
+            }
+            body.append(URLQueryItem(name: "grant_type", value: "authorization_code"))
+            body.append(URLQueryItem(name: "code", value: code))
+            body.append(URLQueryItem(name: "redirect_uri", value: redirectURI.absoluteString))
+            switch flow {
+            case .PKCE:
+                body.append(
+                    URLQueryItem(name: "code_verifier", value: verifier)
+                )
+                verifier = nil
+                break
+            case .ClientSecret:
+                body.append(
+                    URLQueryItem(name: "client_secret", value: clientSecret)
+                )
+                break
+            }
+            break
+        case .RefreshToken:
+            guard refreshToken != nil else {
+                completionHandler(nil, OAuth2Error.InvalidRefreshToken)
+                return
+            }
+            body.append(URLQueryItem(name: "grant_type", value: "refresh_token"))
+            body.append(URLQueryItem(name: "refresh_token", value: refreshToken))
             body.append(
                 URLQueryItem(name: "client_secret", value: clientSecret)
             )
-            break;
+            break
         }
+        
         var httpBody = URLComponents();
         httpBody.queryItems = body;
         
@@ -108,7 +137,7 @@ struct OAuth2 {
         tokenRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         tokenRequest.httpMethod = "POST"
         tokenRequest.httpBody = httpBody.query?.data(using: .utf8)
-
+                
         URLSession.shared.dataTask(with: tokenRequest) {data, response, error in
             do {
                 let tokenResponse = try JSONDecoder().decode(TokenResponse.self, from: data!)
@@ -169,12 +198,19 @@ struct OAuth2 {
     enum OAuth2Error: Error {
         case RedirectedURIMismatch
         case StateMismatch
+        case InvalidAuthorizationCode
+        case InvalidRefreshToken
         case APIResponse(error: String)
     }
     
     enum AuthorizationFlow {
         case ClientSecret
         case PKCE
+    }
+    
+    enum GrantType {
+        case AuthorizationCode
+        case RefreshToken
     }
         
     struct TokenResponse: Codable, Hashable  {

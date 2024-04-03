@@ -44,7 +44,7 @@ struct TokenView: View {
                 Text("refresh_token")
             }
         }.scrollContentBackground(.hidden)
-    }
+   }
 }
 
 #Preview {

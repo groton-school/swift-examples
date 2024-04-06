@@ -1,0 +1,28 @@
+plugin 'cocoapods-keys', {
+  :project => "org.groton.swift-examples.TokenManager",
+  :keys => [
+    "clientID",
+    "clientSecret",
+    "redirectURI"
+  ]}
+
+platform :ios, '17.0'
+use_frameworks!
+
+target 'TokenManager' do
+end
+
+# reset the `Keys` target to ios 17.0
+keys_pod_names = ['Keys']
+post_install do |installer_representation|
+  targets = installer_representation.pods_project.targets.select { |target|
+    keys_pod_names.select { |name|
+      target.display_name.eql? name
+    }.count > 0
+  }
+  targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '17.0'
+    end
+  end
+end

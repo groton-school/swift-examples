@@ -51,8 +51,23 @@ class TokenManager: OAuth2 {
         super.handleRedirect(redirectedURL, flow: flow, completionHandler: storeToken)
     }
     
-    func refresh() {
-        requestToken(grantType: .RefreshToken, refreshToken: refreshToken, completionHandler: storeToken)
+    func refresh(completionHandler: @escaping (String?) -> Void) {
+        requestToken(grantType: .RefreshToken, refreshToken: refreshToken) {tokenResponse, error in
+            self.storeToken(tokenResponse: tokenResponse, error: error)
+            completionHandler(self.currentToken?.access_token)
+        }
+    }
+    
+    func getToken(completionHandler: @escaping (String?) -> Void) {
+        if authorized {
+            if currentToken != nil {
+                completionHandler(currentToken!.access_token)
+            } else {
+                refresh(completionHandler: completionHandler)
+            }
+        } else {
+            completionHandler(nil)
+        }
     }
     
     private func storeToken(tokenResponse: OAuth2.TokenResponse?, error: Error?) {

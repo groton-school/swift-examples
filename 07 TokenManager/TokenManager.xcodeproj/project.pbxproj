@@ -14,7 +14,7 @@
 		1ED1DBFF2BC43D9000980E47 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED1DBFE2BC43D9000980E47 /* TokenManager.swift */; };
 		1ED1DC012BC43DA400980E47 /* OAuth2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED1DC002BC43DA300980E47 /* OAuth2.swift */; };
 		1ED1DC032BC43DB300980E47 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED1DC022BC43DB300980E47 /* Keychain.swift */; };
-		1ED1DC052BC43DC900980E47 /* TokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED1DC042BC43DC900980E47 /* TokenView.swift */; };
+		1ED1DC052BC43DC900980E47 /* AccessTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED1DC042BC43DC900980E47 /* AccessTokenView.swift */; };
 		1ED1DC072BC43DD900980E47 /* RefreshTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED1DC062BC43DD900980E47 /* RefreshTokenView.swift */; };
 		1ED1DC0A2BC43E0600980E47 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED1DC092BC43E0600980E47 /* WebView.swift */; };
 		1ED1DC0C2BC43E4500980E47 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1ED1DC0B2BC43E4500980E47 /* README.md */; };
@@ -31,7 +31,7 @@
 		1ED1DBFE2BC43D9000980E47 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		1ED1DC002BC43DA300980E47 /* OAuth2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2.swift; sourceTree = "<group>"; };
 		1ED1DC022BC43DB300980E47 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
-		1ED1DC042BC43DC900980E47 /* TokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenView.swift; sourceTree = "<group>"; };
+		1ED1DC042BC43DC900980E47 /* AccessTokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenView.swift; sourceTree = "<group>"; };
 		1ED1DC062BC43DD900980E47 /* RefreshTokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenView.swift; sourceTree = "<group>"; };
 		1ED1DC082BC43DF400980E47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		1ED1DC092BC43E0600980E47 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
@@ -80,7 +80,7 @@
 				1ED1DBFE2BC43D9000980E47 /* TokenManager.swift */,
 				1ED1DC002BC43DA300980E47 /* OAuth2.swift */,
 				1ED1DC022BC43DB300980E47 /* Keychain.swift */,
-				1ED1DC042BC43DC900980E47 /* TokenView.swift */,
+				1ED1DC042BC43DC900980E47 /* AccessTokenView.swift */,
 				1ED1DC062BC43DD900980E47 /* RefreshTokenView.swift */,
 				1ED1DC092BC43E0600980E47 /* WebView.swift */,
 				1ED1DBF42BC43D2C00980E47 /* Assets.xcassets */,
@@ -233,7 +233,7 @@
 				1ED1DC0A2BC43E0600980E47 /* WebView.swift in Sources */,
 				1ED1DBF32BC43D2A00980E47 /* ContentView.swift in Sources */,
 				1ED1DBFF2BC43D9000980E47 /* TokenManager.swift in Sources */,
-				1ED1DC052BC43DC900980E47 /* TokenView.swift in Sources */,
+				1ED1DC052BC43DC900980E47 /* AccessTokenView.swift in Sources */,
 				1ED1DC012BC43DA400980E47 /* OAuth2.swift in Sources */,
 				1ED1DBF12BC43D2A00980E47 /* TokenManagerApp.swift in Sources */,
 				1ED1DC032BC43DB300980E47 /* Keychain.swift in Sources */,

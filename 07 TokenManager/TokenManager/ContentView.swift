@@ -15,7 +15,7 @@ struct ContentView: View {
     var body: some View {
         if tokenManager.authorized {
             Form {
-                TokenView(token: tokenManager.currentToken)
+                AccessTokenView(accessToken: tokenManager.currentToken?.access_token)
                 
                 if tokenManager.refreshToken != nil {
                     RefreshTokenView(refreshToken: tokenManager.refreshToken!)

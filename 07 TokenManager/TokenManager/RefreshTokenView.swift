@@ -20,7 +20,9 @@ struct RefreshTokenView: View {
                 Text("refresh_token")
             }
             Button(
-                action: tokenManager.refresh,
+                action: {
+                    tokenManager.refresh(completionHandler: {_ in})
+                },
                 label: {
                     Text("Exchange for Access Token")
                 }

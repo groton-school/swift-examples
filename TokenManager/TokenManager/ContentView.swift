@@ -11,16 +11,14 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(TokenManager.self) var tokenManager: TokenManager
-    @Query private var refreshTokens: [RefreshToken]
 
     var body: some View {
         if tokenManager.authorized {
             Form {
                 TokenView(token: tokenManager.currentToken)
                 
-                ForEach(refreshTokens) {token in
-                    RefreshTokenView(refreshToken: token)
-                    
+                if tokenManager.refreshToken != nil {
+                    RefreshTokenView(refreshToken: tokenManager.refreshToken!)
                 }
                 
                 Section {
@@ -32,7 +30,7 @@ struct ContentView: View {
         } else {
             tokenManager.authorizationView(flow: .ClientSecret)
                 .onOpenURL() { url in
-                    tokenManager.handleRedirect(url: url, flow: .ClientSecret)
+                    tokenManager.handleRedirect(url, flow: .ClientSecret)
                 }
         }
     }

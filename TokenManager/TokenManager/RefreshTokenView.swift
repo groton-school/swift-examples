@@ -10,16 +10,17 @@ import SwiftData
 
 struct RefreshTokenView: View {
     @Environment(TokenManager.self) var tokenManager: TokenManager
-    var refreshToken: RefreshToken
+    var refreshToken: String
+    
     var body: some View {
-        Section(header: Text("Refresh Token (persistent storage)")) {
+        Section(header: Text("Refresh Token (device keychain)")) {
             LabeledContent {
-                Text(refreshToken.refreshToken)
+                Text(refreshToken)
             } label: {
                 Text("refresh_token")
             }
             Button(
-                action: tokenManager.refreshToken,
+                action: tokenManager.refresh,
                 label: {
                     Text("Exchange for Access Token")
                 }
@@ -31,6 +32,6 @@ struct RefreshTokenView: View {
     
 
 #Preview {
-    RefreshTokenView(refreshToken: RefreshToken(refreshToken: "foo"))
+    RefreshTokenView(refreshToken: "foo")
         .environment(TokenManagerApp().tokenManager)
 }

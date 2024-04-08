@@ -8,7 +8,7 @@
 import Foundation
 import CommonCrypto
 
-struct OAuth2 {
+class OAuth2 {
     let authURL: URL
     let tokenURL: URL
     let clientID: String
@@ -36,7 +36,7 @@ struct OAuth2 {
 
     /// - parameters
     ///   - flow: (Optional) The authorization flow being attempted (defaults to `.PKCE`
-    mutating func getAuthorizationURL(flow: AuthorizationFlow = .PKCE) -> URL {
+    func getAuthorizationURL(flow: AuthorizationFlow = .PKCE) -> URL {
         var queryItems = [
             URLQueryItem(name: "response_type", value: "code"),
             URLQueryItem(name: "client_id", value: clientID),
@@ -65,7 +65,7 @@ struct OAuth2 {
     ///   - redirectedURL: The URL passed intp the app via URL scheme
     ///   - flow: (Optional) The authorization flow being attempted (defaults to `.PKCE`
     ///   - completionHandler: Closure that will receive the resulting `TokenResponse` (or error)
-    mutating func handleRedirect(_ redirectedURL: URL, flow: AuthorizationFlow = .PKCE, completionHandler: @escaping (TokenResponse?, Error?) -> Void) -> Void {
+    func handleRedirect(_ redirectedURL: URL, flow: AuthorizationFlow = .PKCE, completionHandler: @escaping (TokenResponse?, Error?) -> Void) -> Void {
         // not just any URL matching our app URL scheme should be processed!
         guard matchRedirectURI(proposed: redirectedURL) else {
             completionHandler(nil, OAuth2Error.RedirectedURIMismatch)
@@ -88,7 +88,7 @@ struct OAuth2 {
         )
     }
     
-    mutating public func requestToken(grantType: GrantType, code: String? = nil, refreshToken: String? = nil, flow: AuthorizationFlow = .PKCE, completionHandler: @escaping (TokenResponse?, Error?) -> Void) {
+    public func requestToken(grantType: GrantType, code: String? = nil, refreshToken: String? = nil, flow: AuthorizationFlow = .PKCE, completionHandler: @escaping (TokenResponse?, Error?) -> Void) {
         var body = [
             URLQueryItem(name: "client_id", value: clientID)
         ]
@@ -164,18 +164,18 @@ struct OAuth2 {
         proposedComponents?.path == expectedComponents?.path
     }
     
-    private mutating func createState() -> String {
+    private func createState() -> String {
         state = randomString()
         return state!
     }
     
-    private mutating func createVerifier() -> String {
+    private func createVerifier() -> String {
         verifier = randomString();
         return verifier!
     }
     
     /// https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce/add-login-using-the-authorization-code-flow-with-pkce#swift-5-sample
-    private mutating func randomString(length: Int = 43) -> String {
+    private func randomString(length: Int = 43) -> String {
         var buffer = [UInt8](repeating: 0, count: length)
         _ = SecRandomCopyBytes(kSecRandomDefault, buffer.count, &buffer)
         return Data(buffer).base64EncodedString()
@@ -185,7 +185,7 @@ struct OAuth2 {
     }
     
     /// https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce/add-login-using-the-authorization-code-flow-with-pkce#swift-5-sample
-    private mutating func createCodeChallenge() -> String? {
+    private func createCodeChallenge() -> String? {
         guard let data = createVerifier().data(using: .utf8) else { return nil }
         var buffer = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
         _ = data.withUnsafeBytes {

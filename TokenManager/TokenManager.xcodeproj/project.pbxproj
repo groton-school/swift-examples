@@ -7,124 +7,125 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1ED78F2A2BC1BBFF00C80CF3 /* TokenManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED78F292BC1BBFF00C80CF3 /* TokenManagerApp.swift */; };
-		1ED78F2C2BC1BBFF00C80CF3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED78F2B2BC1BBFF00C80CF3 /* ContentView.swift */; };
-		1ED78F302BC1BC0100C80CF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ED78F2F2BC1BC0100C80CF3 /* Assets.xcassets */; };
-		1ED78F332BC1BC0100C80CF3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ED78F322BC1BC0100C80CF3 /* Preview Assets.xcassets */; };
-		1ED78F3A2BC1BC1200C80CF3 /* OAuth2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED78F392BC1BC1200C80CF3 /* OAuth2.swift */; };
-		1ED78F3C2BC1BC2000C80CF3 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED78F3B2BC1BC2000C80CF3 /* WebView.swift */; };
-		1ED78F3E2BC1BC2F00C80CF3 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED78F3D2BC1BC2F00C80CF3 /* TokenManager.swift */; };
-		1ED78F412BC1BE4500C80CF3 /* RefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED78F402BC1BE4500C80CF3 /* RefreshToken.swift */; };
-		1ED78F462BC1C27700C80CF3 /* RefreshTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED78F452BC1C27700C80CF3 /* RefreshTokenView.swift */; };
-		1ED78F482BC1C6F400C80CF3 /* TokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED78F472BC1C6F400C80CF3 /* TokenView.swift */; };
-		D0108615D94E702C3304F205 /* Pods_TokenManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F56B17FC3ECB960C28ABC9 /* Pods_TokenManager.framework */; };
+		1ED1DBF12BC43D2A00980E47 /* TokenManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED1DBF02BC43D2A00980E47 /* TokenManagerApp.swift */; };
+		1ED1DBF32BC43D2A00980E47 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED1DBF22BC43D2A00980E47 /* ContentView.swift */; };
+		1ED1DBF52BC43D2C00980E47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ED1DBF42BC43D2C00980E47 /* Assets.xcassets */; };
+		1ED1DBF82BC43D2C00980E47 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ED1DBF72BC43D2C00980E47 /* Preview Assets.xcassets */; };
+		1ED1DBFF2BC43D9000980E47 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED1DBFE2BC43D9000980E47 /* TokenManager.swift */; };
+		1ED1DC012BC43DA400980E47 /* OAuth2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED1DC002BC43DA300980E47 /* OAuth2.swift */; };
+		1ED1DC032BC43DB300980E47 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED1DC022BC43DB300980E47 /* Keychain.swift */; };
+		1ED1DC052BC43DC900980E47 /* TokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED1DC042BC43DC900980E47 /* TokenView.swift */; };
+		1ED1DC072BC43DD900980E47 /* RefreshTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED1DC062BC43DD900980E47 /* RefreshTokenView.swift */; };
+		1ED1DC0A2BC43E0600980E47 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED1DC092BC43E0600980E47 /* WebView.swift */; };
+		1ED1DC0C2BC43E4500980E47 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1ED1DC0B2BC43E4500980E47 /* README.md */; };
+		2EAC2C81B196AF81F6BDC9A3 /* Pods_TokenManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF0028732A1B6EDACDE42523 /* Pods_TokenManager.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1ED78F262BC1BBFF00C80CF3 /* TokenManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TokenManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		1ED78F292BC1BBFF00C80CF3 /* TokenManagerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManagerApp.swift; sourceTree = "<group>"; };
-		1ED78F2B2BC1BBFF00C80CF3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		1ED78F2F2BC1BC0100C80CF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1ED78F322BC1BC0100C80CF3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		1ED78F392BC1BC1200C80CF3 /* OAuth2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2.swift; sourceTree = "<group>"; };
-		1ED78F3B2BC1BC2000C80CF3 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
-		1ED78F3D2BC1BC2F00C80CF3 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
-		1ED78F3F2BC1BD0900C80CF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		1ED78F402BC1BE4500C80CF3 /* RefreshToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshToken.swift; sourceTree = "<group>"; };
-		1ED78F422BC1C08000C80CF3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		1ED78F452BC1C27700C80CF3 /* RefreshTokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenView.swift; sourceTree = "<group>"; };
-		1ED78F472BC1C6F400C80CF3 /* TokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenView.swift; sourceTree = "<group>"; };
-		5B46F191543036FB2104F6AF /* Pods-TokenManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TokenManager.debug.xcconfig"; path = "Target Support Files/Pods-TokenManager/Pods-TokenManager.debug.xcconfig"; sourceTree = "<group>"; };
-		6272F8B71ABCA5390649A3A9 /* Pods-TokenManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TokenManager.release.xcconfig"; path = "Target Support Files/Pods-TokenManager/Pods-TokenManager.release.xcconfig"; sourceTree = "<group>"; };
-		93F56B17FC3ECB960C28ABC9 /* Pods_TokenManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TokenManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0463D6907008B5E25174A16E /* Pods-TokenManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TokenManager.debug.xcconfig"; path = "Target Support Files/Pods-TokenManager/Pods-TokenManager.debug.xcconfig"; sourceTree = "<group>"; };
+		1ED1DBED2BC43D2A00980E47 /* TokenManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TokenManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1ED1DBF02BC43D2A00980E47 /* TokenManagerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManagerApp.swift; sourceTree = "<group>"; };
+		1ED1DBF22BC43D2A00980E47 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1ED1DBF42BC43D2C00980E47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1ED1DBF72BC43D2C00980E47 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1ED1DBFE2BC43D9000980E47 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
+		1ED1DC002BC43DA300980E47 /* OAuth2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2.swift; sourceTree = "<group>"; };
+		1ED1DC022BC43DB300980E47 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		1ED1DC042BC43DC900980E47 /* TokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenView.swift; sourceTree = "<group>"; };
+		1ED1DC062BC43DD900980E47 /* RefreshTokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenView.swift; sourceTree = "<group>"; };
+		1ED1DC082BC43DF400980E47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1ED1DC092BC43E0600980E47 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		1ED1DC0B2BC43E4500980E47 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3A1C273BEAFA0439B07EE75C /* Pods-TokenManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TokenManager.release.xcconfig"; path = "Target Support Files/Pods-TokenManager/Pods-TokenManager.release.xcconfig"; sourceTree = "<group>"; };
+		DF0028732A1B6EDACDE42523 /* Pods_TokenManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TokenManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1ED78F232BC1BBFF00C80CF3 /* Frameworks */ = {
+		1ED1DBEA2BC43D2A00980E47 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0108615D94E702C3304F205 /* Pods_TokenManager.framework in Frameworks */,
+				2EAC2C81B196AF81F6BDC9A3 /* Pods_TokenManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1ED78F1D2BC1BBFF00C80CF3 = {
+		1ED1DBE42BC43D2A00980E47 = {
 			isa = PBXGroup;
 			children = (
-				1ED78F422BC1C08000C80CF3 /* README.md */,
-				1ED78F282BC1BBFF00C80CF3 /* TokenManager */,
-				1ED78F272BC1BBFF00C80CF3 /* Products */,
-				D6E21CA485913B441026D4FC /* Pods */,
-				8B32CF1564F35FF29FCE7D86 /* Frameworks */,
+				1ED1DC0B2BC43E4500980E47 /* README.md */,
+				1ED1DBEF2BC43D2A00980E47 /* TokenManager */,
+				1ED1DBEE2BC43D2A00980E47 /* Products */,
+				510F2237231475A04515B0F2 /* Pods */,
+				A720783527151BA65E7001B5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		1ED78F272BC1BBFF00C80CF3 /* Products */ = {
+		1ED1DBEE2BC43D2A00980E47 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1ED78F262BC1BBFF00C80CF3 /* TokenManager.app */,
+				1ED1DBED2BC43D2A00980E47 /* TokenManager.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1ED78F282BC1BBFF00C80CF3 /* TokenManager */ = {
+		1ED1DBEF2BC43D2A00980E47 /* TokenManager */ = {
 			isa = PBXGroup;
 			children = (
-				1ED78F3F2BC1BD0900C80CF3 /* Info.plist */,
-				1ED78F292BC1BBFF00C80CF3 /* TokenManagerApp.swift */,
-				1ED78F3D2BC1BC2F00C80CF3 /* TokenManager.swift */,
-				1ED78F392BC1BC1200C80CF3 /* OAuth2.swift */,
-				1ED78F472BC1C6F400C80CF3 /* TokenView.swift */,
-				1ED78F402BC1BE4500C80CF3 /* RefreshToken.swift */,
-				1ED78F452BC1C27700C80CF3 /* RefreshTokenView.swift */,
-				1ED78F3B2BC1BC2000C80CF3 /* WebView.swift */,
-				1ED78F2B2BC1BBFF00C80CF3 /* ContentView.swift */,
-				1ED78F2F2BC1BC0100C80CF3 /* Assets.xcassets */,
-				1ED78F312BC1BC0100C80CF3 /* Preview Content */,
+				1ED1DC082BC43DF400980E47 /* Info.plist */,
+				1ED1DBF02BC43D2A00980E47 /* TokenManagerApp.swift */,
+				1ED1DBF22BC43D2A00980E47 /* ContentView.swift */,
+				1ED1DBFE2BC43D9000980E47 /* TokenManager.swift */,
+				1ED1DC002BC43DA300980E47 /* OAuth2.swift */,
+				1ED1DC022BC43DB300980E47 /* Keychain.swift */,
+				1ED1DC042BC43DC900980E47 /* TokenView.swift */,
+				1ED1DC062BC43DD900980E47 /* RefreshTokenView.swift */,
+				1ED1DC092BC43E0600980E47 /* WebView.swift */,
+				1ED1DBF42BC43D2C00980E47 /* Assets.xcassets */,
+				1ED1DBF62BC43D2C00980E47 /* Preview Content */,
 			);
 			path = TokenManager;
 			sourceTree = "<group>";
 		};
-		1ED78F312BC1BC0100C80CF3 /* Preview Content */ = {
+		1ED1DBF62BC43D2C00980E47 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				1ED78F322BC1BC0100C80CF3 /* Preview Assets.xcassets */,
+				1ED1DBF72BC43D2C00980E47 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		8B32CF1564F35FF29FCE7D86 /* Frameworks */ = {
+		510F2237231475A04515B0F2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				93F56B17FC3ECB960C28ABC9 /* Pods_TokenManager.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		D6E21CA485913B441026D4FC /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				5B46F191543036FB2104F6AF /* Pods-TokenManager.debug.xcconfig */,
-				6272F8B71ABCA5390649A3A9 /* Pods-TokenManager.release.xcconfig */,
+				0463D6907008B5E25174A16E /* Pods-TokenManager.debug.xcconfig */,
+				3A1C273BEAFA0439B07EE75C /* Pods-TokenManager.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		A720783527151BA65E7001B5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DF0028732A1B6EDACDE42523 /* Pods_TokenManager.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1ED78F252BC1BBFF00C80CF3 /* TokenManager */ = {
+		1ED1DBEC2BC43D2A00980E47 /* TokenManager */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1ED78F362BC1BC0100C80CF3 /* Build configuration list for PBXNativeTarget "TokenManager" */;
+			buildConfigurationList = 1ED1DBFB2BC43D2C00980E47 /* Build configuration list for PBXNativeTarget "TokenManager" */;
 			buildPhases = (
-				E7226B2411D5056FBB8A501C /* [CP] Check Pods Manifest.lock */,
-				1ED78F222BC1BBFF00C80CF3 /* Sources */,
-				1ED78F232BC1BBFF00C80CF3 /* Frameworks */,
-				1ED78F242BC1BBFF00C80CF3 /* Resources */,
-				AF5CFDB8DA21CF624A82FDB6 /* [CP] Embed Pods Frameworks */,
+				983E4E7F201CF23545138F8F /* [CP] Check Pods Manifest.lock */,
+				1ED1DBE92BC43D2A00980E47 /* Sources */,
+				1ED1DBEA2BC43D2A00980E47 /* Frameworks */,
+				1ED1DBEB2BC43D2A00980E47 /* Resources */,
+				513E6DAB17F518A13C8AA4B3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,25 +133,25 @@
 			);
 			name = TokenManager;
 			productName = TokenManager;
-			productReference = 1ED78F262BC1BBFF00C80CF3 /* TokenManager.app */;
+			productReference = 1ED1DBED2BC43D2A00980E47 /* TokenManager.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		1ED78F1E2BC1BBFF00C80CF3 /* Project object */ = {
+		1ED1DBE52BC43D2A00980E47 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
-					1ED78F252BC1BBFF00C80CF3 = {
+					1ED1DBEC2BC43D2A00980E47 = {
 						CreatedOnToolsVersion = 15.3;
 					};
 				};
 			};
-			buildConfigurationList = 1ED78F212BC1BBFF00C80CF3 /* Build configuration list for PBXProject "TokenManager" */;
+			buildConfigurationList = 1ED1DBE82BC43D2A00980E47 /* Build configuration list for PBXProject "TokenManager" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -158,30 +159,31 @@
 				en,
 				Base,
 			);
-			mainGroup = 1ED78F1D2BC1BBFF00C80CF3;
-			productRefGroup = 1ED78F272BC1BBFF00C80CF3 /* Products */;
+			mainGroup = 1ED1DBE42BC43D2A00980E47;
+			productRefGroup = 1ED1DBEE2BC43D2A00980E47 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1ED78F252BC1BBFF00C80CF3 /* TokenManager */,
+				1ED1DBEC2BC43D2A00980E47 /* TokenManager */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		1ED78F242BC1BBFF00C80CF3 /* Resources */ = {
+		1ED1DBEB2BC43D2A00980E47 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1ED78F332BC1BC0100C80CF3 /* Preview Assets.xcassets in Resources */,
-				1ED78F302BC1BC0100C80CF3 /* Assets.xcassets in Resources */,
+				1ED1DC0C2BC43E4500980E47 /* README.md in Resources */,
+				1ED1DBF82BC43D2C00980E47 /* Preview Assets.xcassets in Resources */,
+				1ED1DBF52BC43D2C00980E47 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		AF5CFDB8DA21CF624A82FDB6 /* [CP] Embed Pods Frameworks */ = {
+		513E6DAB17F518A13C8AA4B3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -198,7 +200,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TokenManager/Pods-TokenManager-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E7226B2411D5056FBB8A501C /* [CP] Check Pods Manifest.lock */ = {
+		983E4E7F201CF23545138F8F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -223,25 +225,25 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1ED78F222BC1BBFF00C80CF3 /* Sources */ = {
+		1ED1DBE92BC43D2A00980E47 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1ED78F462BC1C27700C80CF3 /* RefreshTokenView.swift in Sources */,
-				1ED78F2C2BC1BBFF00C80CF3 /* ContentView.swift in Sources */,
-				1ED78F3E2BC1BC2F00C80CF3 /* TokenManager.swift in Sources */,
-				1ED78F3C2BC1BC2000C80CF3 /* WebView.swift in Sources */,
-				1ED78F3A2BC1BC1200C80CF3 /* OAuth2.swift in Sources */,
-				1ED78F412BC1BE4500C80CF3 /* RefreshToken.swift in Sources */,
-				1ED78F482BC1C6F400C80CF3 /* TokenView.swift in Sources */,
-				1ED78F2A2BC1BBFF00C80CF3 /* TokenManagerApp.swift in Sources */,
+				1ED1DC072BC43DD900980E47 /* RefreshTokenView.swift in Sources */,
+				1ED1DC0A2BC43E0600980E47 /* WebView.swift in Sources */,
+				1ED1DBF32BC43D2A00980E47 /* ContentView.swift in Sources */,
+				1ED1DBFF2BC43D9000980E47 /* TokenManager.swift in Sources */,
+				1ED1DC052BC43DC900980E47 /* TokenView.swift in Sources */,
+				1ED1DC012BC43DA400980E47 /* OAuth2.swift in Sources */,
+				1ED1DBF12BC43D2A00980E47 /* TokenManagerApp.swift in Sources */,
+				1ED1DC032BC43DB300980E47 /* Keychain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		1ED78F342BC1BC0100C80CF3 /* Debug */ = {
+		1ED1DBF92BC43D2C00980E47 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -304,7 +306,7 @@
 			};
 			name = Debug;
 		};
-		1ED78F352BC1BC0100C80CF3 /* Release */ = {
+		1ED1DBFA2BC43D2C00980E47 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -360,9 +362,9 @@
 			};
 			name = Release;
 		};
-		1ED78F372BC1BC0100C80CF3 /* Debug */ = {
+		1ED1DBFC2BC43D2C00980E47 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B46F191543036FB2104F6AF /* Pods-TokenManager.debug.xcconfig */;
+			baseConfigurationReference = 0463D6907008B5E25174A16E /* Pods-TokenManager.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -392,9 +394,9 @@
 			};
 			name = Debug;
 		};
-		1ED78F382BC1BC0100C80CF3 /* Release */ = {
+		1ED1DBFD2BC43D2C00980E47 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6272F8B71ABCA5390649A3A9 /* Pods-TokenManager.release.xcconfig */;
+			baseConfigurationReference = 3A1C273BEAFA0439B07EE75C /* Pods-TokenManager.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -427,25 +429,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1ED78F212BC1BBFF00C80CF3 /* Build configuration list for PBXProject "TokenManager" */ = {
+		1ED1DBE82BC43D2A00980E47 /* Build configuration list for PBXProject "TokenManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1ED78F342BC1BC0100C80CF3 /* Debug */,
-				1ED78F352BC1BC0100C80CF3 /* Release */,
+				1ED1DBF92BC43D2C00980E47 /* Debug */,
+				1ED1DBFA2BC43D2C00980E47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1ED78F362BC1BC0100C80CF3 /* Build configuration list for PBXNativeTarget "TokenManager" */ = {
+		1ED1DBFB2BC43D2C00980E47 /* Build configuration list for PBXNativeTarget "TokenManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1ED78F372BC1BC0100C80CF3 /* Debug */,
-				1ED78F382BC1BC0100C80CF3 /* Release */,
+				1ED1DBFC2BC43D2C00980E47 /* Debug */,
+				1ED1DBFD2BC43D2C00980E47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 1ED78F1E2BC1BBFF00C80CF3 /* Project object */;
+	rootObject = 1ED1DBE52BC43D2A00980E47 /* Project object */;
 }

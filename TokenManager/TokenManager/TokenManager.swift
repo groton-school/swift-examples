@@ -6,38 +6,37 @@
 //
 
 import Foundation
-import SwiftData
 
 @Observable
-class TokenManager {
-    private var modelContext: ModelContext
-    private var oauth2: OAuth2
+class TokenManager: OAuth2 {
     var currentToken: OAuth2.TokenResponse?
-    var refreshTokens: [RefreshToken]
     private(set) var authorized: Bool
+    private let keychainTag: String
+    var refreshToken: String?
     
-    init(oauth2: OAuth2, currentToken: OAuth2.TokenResponse? = nil, modelContext: ModelContext) {
-        self.modelContext = modelContext
-        self.oauth2 = oauth2
-        self.currentToken = currentToken
-        do {
-            refreshTokens = try modelContext.fetch(FetchDescriptor<RefreshToken>())
-        } catch {
-            fatalError(error.localizedDescription)
-        }
+    init(authURL: URL, tokenURL: URL, clientID: String, clientSecret: String? = nil, scope: String? = nil, redirectURI: URL, keychainTag: String? = nil) {
+        self.keychainTag = keychainTag ?? tokenURL.absoluteString
         authorized = false
+        currentToken = nil
+        do {
+            refreshToken = try Keychain.get(tag: self.keychainTag)
+        } catch {
+            print(error)
+            refreshToken = nil
+        }
+        super.init(authURL: authURL, tokenURL: tokenURL, clientID: clientID, clientSecret: clientSecret, redirectURI: redirectURI)
         setAuthorized()
     }
         
     private func setAuthorized() {
-        authorized = currentToken != nil || refreshTokens.count > 0
+        authorized = currentToken != nil || refreshToken != nil
     }
     
     func deauthorize() {
         currentToken = nil
+        refreshToken = nil
         do {
-            try modelContext.delete(model: RefreshToken.self)
-            refreshTokens = try modelContext.fetch(FetchDescriptor<RefreshToken>())
+            try Keychain.delete(tag: keychainTag)
             setAuthorized()
         } catch {
             fatalError("Error deleting refresh tokens: \(error)")
@@ -45,11 +44,15 @@ class TokenManager {
     }
     
     func authorizationView(flow: OAuth2.AuthorizationFlow = .PKCE) -> WebView {
-        return WebView(url: oauth2.getAuthorizationURL(flow: flow), clearData: !authorized)
+        return WebView(url: getAuthorizationURL(flow: flow), clearData: !authorized)
     }
     
-    func handleRedirect(url: URL, flow: OAuth2.AuthorizationFlow = .PKCE) {
-        oauth2.handleRedirect(url, flow: flow, completionHandler: storeToken)
+    func handleRedirect(_ redirectedURL: URL, flow: OAuth2.AuthorizationFlow = .PKCE) {
+        super.handleRedirect(redirectedURL, flow: flow, completionHandler: storeToken)
+    }
+    
+    func refresh() {
+        requestToken(grantType: .RefreshToken, refreshToken: refreshToken, completionHandler: storeToken)
     }
     
     private func storeToken(tokenResponse: OAuth2.TokenResponse?, error: Error?) {
@@ -62,24 +65,18 @@ class TokenManager {
             return
         }
         self.currentToken = tokenResponse
-        if self.currentToken?.refresh_token != nil {
+        if tokenResponse?.refresh_token != nil {
             do {
-                modelContext.insert(RefreshToken(refreshToken: self.currentToken!.refresh_token!))
-                self.refreshTokens = try modelContext.fetch(FetchDescriptor<RefreshToken>())
+                if refreshToken != nil {
+                    try Keychain.update(currentToken!.refresh_token!, tag: keychainTag)
+                } else {
+                    try Keychain.save(currentToken!.refresh_token!, tag: keychainTag)
+                }
+                refreshToken = currentToken!.refresh_token
             } catch {
                 fatalError("Error storing token: \(error)")
             }
         }
         setAuthorized()
-    }
-    
-    func refreshToken() {
-        let refreshToken = refreshTokens.removeFirst()
-        modelContext.delete(refreshToken)
-        oauth2.requestToken(
-            grantType: .RefreshToken,
-            refreshToken: refreshToken.refreshToken,
-            completionHandler: storeToken
-        )
     }
 }

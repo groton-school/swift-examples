@@ -9,7 +9,7 @@ import SwiftUI
 
 struct UserView: View {
     @Environment(APIManager.self) var apiManager: APIManager
-    let userId: Int?
+    let userId: Int32?
     @State var user: User?
     @State var error: Error?
     
@@ -27,14 +27,14 @@ struct UserView: View {
                     }
                 }
             } else {
-                Text(String(describing: error))
+                ErrorView(error!)
             }
         } else {
             VStack {
                 Spacer()
                 HStack {
                     Image(systemName: "person.fill")
-                    Text("\(user!.preferred_name ?? user!.preferred_name ?? user!.first_name ?? "") \(user!.last_name ?? "")")
+                    Text("\(preferredName()) \(user!.last_name ?? "")")
                 }
                 Text(user!.email ?? "")
                 Spacer()
@@ -43,8 +43,28 @@ struct UserView: View {
         }
     }
     
-    init(userId: Int? = nil) {
+    func preferredName() -> String {
+        if user != nil {
+            if user!.preferred_name != nil && !user!.preferred_name!.isEmpty {
+                return user!.preferred_name!
+            }
+            if user!.nick_name != nil && !user!.nick_name!.isEmpty {
+                return user!.nick_name!
+            }
+            if user!.first_name != nil {
+                return user!.first_name!
+            }
+        }
+        return ""
+    }
+    
+    init(userId: Int32? = nil) {
         self.userId = userId
+    }
+    
+    init(_ user: User) {
+        self.userId = nil
+        self.user = user
     }
 }
 

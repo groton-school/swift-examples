@@ -36,7 +36,7 @@ class APIManager: TokenManager {
                     let response = try JSONDecoder().decode(ExpectedResponseType.self, from: data!)
                     completionHandler(response, nil)
                 } catch {
-                    completionHandler(nil, APIError.APIResponse(error: String(data: Data(base64Encoded: data!.base64EncodedString())!, encoding: .utf8)!))
+                    completionHandler(nil, APIError.Encoding(error: error))
                 }
             }.resume()
         }

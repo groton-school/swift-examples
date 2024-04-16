@@ -34,7 +34,7 @@ struct User: Codable {
     var middle_name: String?
     var nick_name: String?
     var preferred_name: String?
-    var dob: Date?
+    var dob: String?
     var prefix: String?
     var suffix: String?
     var profile_pictures: ProfilePictureUrls?

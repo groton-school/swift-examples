@@ -12,10 +12,10 @@ class APIManager: TokenManager {
     private let headers: [(String, String)]
 
     
-    init(authURL: URL, tokenURL: URL, clientID: String, clientSecret: String? = nil, scope: String? = nil, redirectURI: URL, keychainTag: String? = nil, baseURL: URL, headers: [(String, String)] = []) {
+    init(authURL: URL, tokenURL: URL, clientID: String, clientSecret: String? = nil, scope: String? = nil, redirectURI: URL, keychainTag: String? = nil, baseURL: URL, headers: [(String, String)] = [], flow: OAuth2.AuthorizationFlow = .PKCE, authorizeInHeader: Bool = false) {
         self.baseURL = baseURL
         self.headers = headers
-        super.init(authURL: authURL, tokenURL: tokenURL, clientID: clientID, clientSecret: clientSecret, redirectURI: redirectURI)
+        super.init(authURL: authURL, tokenURL: tokenURL, clientID: clientID, clientSecret: clientSecret, redirectURI: redirectURI, flow: flow, authorizeInHeader: authorizeInHeader)
     }
     
     

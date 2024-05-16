@@ -20,7 +20,7 @@ struct APIManagerApp: App {
     }
     
     init() {
-        let keys = Keys.APIManagerKeys()
+        let keys = Keys.OrgGrotonSwiftExamplesAPIManagerKeys()
         apiManager = APIManager(
             authURL: URL(string: "https://app.blackbaud.com/oauth/authorize")!,
             tokenURL: URL(string: "https://oauth2.sky.blackbaud.com/token")!,
@@ -28,7 +28,9 @@ struct APIManagerApp: App {
             clientSecret: keys.clientSecret,
             redirectURI: URL(string: keys.redirectURI)!,
             baseURL: URL(string: "https://api.sky.blackbaud.com/school/v1/")!,
-            headers: [("Bb-Api-Subscription-Key", keys.subscriptionAccessKey)]
+            headers: [("Bb-Api-Subscription-Key", keys.subscriptionAccessKey)],
+            flow: .ClientSecret,
+            authorizeInHeader: true
         )
     }
 }

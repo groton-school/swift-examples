@@ -15,19 +15,20 @@ struct ContentView: View {
     
     var body: some View {
         let keys = Keys.OrgGrotonSwiftExamplesOAuth2AuthorizationKeys()
-        var oauth2 = OAuth2(
+        let oauth2 = OAuth2(
             authURL: URL(string: "https://github.com/login/oauth/authorize")!,
             tokenURL: URL(string: "https://github.com/login/oauth/access_token")!,
             clientID: keys.clientID,
             clientSecret: keys.clientSecret,
-            redirectURI: URL(string: keys.redirectURI)!
+            redirectURI: URL(string: keys.redirectURI)!,
+            flow: .ClientSecret
         )
         
         if (token == nil) {
             NavigationStack(path: $path) {
                 VStack {
                     NavigationLink(
-                        destination: WebView(url: oauth2.getAuthorizationURL(flow: .ClientSecret), clearData: true),
+                        destination: WebView(url: oauth2.getAuthorizationURL(), clearData: true),
                         label: {
                             HStack {
                                 Image(systemName: "person.badge.key.fill")
@@ -36,7 +37,7 @@ struct ContentView: View {
                         }
                     )
                 }.onOpenURL(perform: {url in
-                    oauth2.handleRedirect(url, flow: .ClientSecret, completionHandler: storeToken)
+                    oauth2.handleRedirect(url, completionHandler: storeToken)
                 })
             }
         } else {

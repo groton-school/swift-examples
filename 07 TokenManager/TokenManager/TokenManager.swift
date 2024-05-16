@@ -14,17 +14,18 @@ class TokenManager: OAuth2 {
     private let keychainTag: String
     var refreshToken: String?
     
-    init(authURL: URL, tokenURL: URL, clientID: String, clientSecret: String? = nil, scope: String? = nil, redirectURI: URL, keychainTag: String? = nil) {
-        self.keychainTag = keychainTag ?? tokenURL.absoluteString
+    init(authURL: URL, tokenURL: URL, clientID: String, clientSecret: String? = nil, scope: String? = nil, redirectURI: URL, keychainTag: String? = nil, flow: OAuth2.AuthorizationFlow = .PKCE, authorizeInHeader: Bool = false) {
+        let _keychainTag = keychainTag ?? tokenURL.absoluteString
+        self.keychainTag = _keychainTag
         authorized = false
         currentToken = nil
+        super.init(authURL: authURL, tokenURL: tokenURL, clientID: clientID, clientSecret: clientSecret, redirectURI: redirectURI, flow: flow, authorizeInHeader: authorizeInHeader)
         do {
-            refreshToken = try Keychain.get(tag: self.keychainTag)
+            refreshToken = try Keychain.get(tag: _keychainTag)
         } catch {
-            print(error)
+            print("Error loading \(_keychainTag) from keychain: \(error)")
             refreshToken = nil
         }
-        super.init(authURL: authURL, tokenURL: tokenURL, clientID: clientID, clientSecret: clientSecret, redirectURI: redirectURI)
         setAuthorized()
     }
         
@@ -37,18 +38,18 @@ class TokenManager: OAuth2 {
         refreshToken = nil
         do {
             try Keychain.delete(tag: keychainTag)
-            setAuthorized()
         } catch {
-            fatalError("Error deleting refresh tokens: \(error)")
+            print("Error deleting \(keychainTag) from keychain: \(error)")
         }
+        setAuthorized()
     }
     
-    func authorizationView(flow: OAuth2.AuthorizationFlow = .PKCE) -> WebView {
-        return WebView(url: getAuthorizationURL(flow: flow), clearData: !authorized)
+    func authorizationView() -> WebView {
+        return WebView(url: getAuthorizationURL(), clearData: !authorized)
     }
     
-    func handleRedirect(_ redirectedURL: URL, flow: OAuth2.AuthorizationFlow = .PKCE) {
-        super.handleRedirect(redirectedURL, flow: flow, completionHandler: storeToken)
+    func handleRedirect(_ redirectedURL: URL) {
+        super.handleRedirect(redirectedURL,completionHandler: storeToken)
     }
     
     func refresh(completionHandler: @escaping (String?) -> Void) {

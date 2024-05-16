@@ -26,7 +26,8 @@ struct TokenManagerApp: App {
             tokenURL: URL(string: "https://oauth2.sky.blackbaud.com/token")!,
             clientID: keys.clientID,
             clientSecret: keys.clientSecret,
-            redirectURI: URL(string: keys.redirectURI)!
+            redirectURI: URL(string: keys.redirectURI)!,
+            authorizeInHeader: true
         )
     }
 }

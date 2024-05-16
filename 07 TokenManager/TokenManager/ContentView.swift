@@ -11,7 +11,8 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(TokenManager.self) var tokenManager: TokenManager
-
+    @State var flow: OAuth2.AuthorizationFlow? = nil
+    
     var body: some View {
         if tokenManager.authorized {
             Form {
@@ -22,17 +23,36 @@ struct ContentView: View {
                 }
                 
                 Section {
-                    Button(action: tokenManager.deauthorize, label: {
+                    Button(action: {
+                        flow = nil
+                        tokenManager.deauthorize()
+                    }, label: {
                         Text("Deauthorize")
                     })
                 }
             }
         } else {
-            tokenManager.authorizationView(flow: .ClientSecret)
-                .onOpenURL() { url in
-                    tokenManager.handleRedirect(url, flow: .ClientSecret)
+            if flow == nil {
+                VStack {
+                    Button("Client Secret") {
+                        setFlow(.ClientSecret)
+                    }
+                    Button("PKCE") {
+                        setFlow(.PKCE)
+                    }
                 }
+            } else {
+                tokenManager.authorizationView().onOpenURL() { url in
+                    tokenManager.handleRedirect(url)
+                }
+
+            }
         }
+    }
+    
+    func setFlow(_ flow: OAuth2.AuthorizationFlow) {
+        tokenManager.flow = flow
+        self.flow = tokenManager.flow
     }
 }
 

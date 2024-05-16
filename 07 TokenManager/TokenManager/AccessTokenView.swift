@@ -29,5 +29,7 @@ struct AccessTokenView: View {
 }
 
 #Preview {
-    AccessTokenView(accessToken: "foo")
+    Form {
+        AccessTokenView(accessToken: "Anim_do_in_mollit_ullamco_amet_esse_in_minim_ullamco_amet_enim_id_pariatur_tempor_culpa_enim_lorem_officia_aliqua_culpa_exercitation_laborum_sit_adipiscing_ea_exercitation_nulla_sint_consectetur_ea_labore_nulla_voluptate_commodo_eu_labore_reprehenderit_ven")
+    }
 }

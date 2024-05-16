@@ -34,6 +34,8 @@ struct RefreshTokenView: View {
     
 
 #Preview {
-    RefreshTokenView(refreshToken: "foo")
-        .environment(TokenManagerApp().tokenManager)
+    Form {
+        RefreshTokenView(refreshToken: "Pariatur_tempor_culpa_enim_lorem_officia_adipiscing_culpa_exerci")
+            .environment(TokenManagerApp().tokenManager)
+    }
 }

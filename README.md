@@ -18,34 +18,28 @@ Resources for 2024 Application Design Tutorial.
 
 ### `bundle install` fails
 
-If you are using the macOS default install of Ruby, things may not work early on. Go ahead and install the Homebrew version of Ruby instead.
+If you are using the macOS default install of Ruby, things may not work early on. Go ahead and install the Homebrew version of `rbenv` instead. `rbenv` lets you install and work with different versions of Ruby transparently.
 
 ```sh
-brew install ruby
+brew install rbenv
 ```
 
-Cocoapods blithely suggests that you install it using `sudo`. This is a terrible suggestion -- you don't want to install software as root! Instead, fix the permissions that are blocking it.
+Cocoapods blithely suggests that you install it using `sudo`. This is a terrible suggestion -- you don't want to install software as root! Instead, use `rbenv` to install the required version of ruby, and then try running the Bundler again:
 
-``` sh
-ls -hal /opt/homebrew/lib/ruby
+```sh
+cd path/to/project/directory
+cat .ruby-version | rbenv install
+echo 'eval "$(rbenv init -)"' >> ~/.zprofile
+source ~/.zprofile
+bundle install
 ```
 
-This will give you a directory listing of the Homebrew Ruby install:
+The above will: 
 
-```
-total 0
-drwxr-xr-x    5 sbattis  admin   160B Mar 20 15:27 .
-drwxrwxr-x  528 sbattis  admin    17K Mar 18 08:21 ..
-drwxr-xr-x    3 sbattis  admin    96B Feb 22 10:43 gems
-drwxr-xr-x@   3 sbattis  admin    96B Mar 19 14:23 site_ruby
-drwxr-xr-x    3 sbattis  admin    96B Mar 20 15:27 vendor_ruby
-```
-
-The user (`sbattis`) and group (`admin`) are listed next to each subdirectory. The core problem is that somewhere in `gems`, a directory is owned by `root`, when it should be owned by _you_. Fix it (user your username in place of mine)!
-
-```bash
-sudo chown -R sbattis /opt/homebrew/lib/ruby/gems
-```
+1. Install the version of Ruby specified in the `.ruby-version` file in the project.
+2. Add the `rbenv` initializer to your login profile
+3. Reload your login profile to initialize `rbenv`
+4. Re-run `bundle install`, this time using the correct version of Ruby and the Bundler
 
 ### Build fails
 
